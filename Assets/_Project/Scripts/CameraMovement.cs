@@ -27,11 +27,14 @@ public class CameraMovement : MonoBehaviour
 
 
     // adapt for zoom https://www.youtube.com/watch?v=5Ue0waWtkY4
+    // https://www.youtube.com/watch?v=Qd3hkKM-UTI
+    // code monkey: https://www.youtube.com/watch?v=pJQndtJ2rk0
 
     void Awake()
     {
         _inputs = new Inputs();
-        transform.position = new Vector3(0, 0, 0);
+        transform.position = new Vector3(0, 0, -10);
+        _camera.m_Lens.OrthographicSize = _cameraDistances[0];
     }
 
     void Update()

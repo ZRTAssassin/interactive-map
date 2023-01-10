@@ -26,16 +26,6 @@ public class Database : MonoBehaviour
     public static Location GetLocationByID(string id)
     {
         return _instance._locations._allLocations.FirstOrDefault(t => t._id == id);
-        
-        foreach (var location in _instance._locations._allLocations)
-        {
-            if (location._id == id)
-            {
-                return location;
-            }
-        }
-
-        return null;
     }
 
     public static Location GetRandomLocation()
