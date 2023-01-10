@@ -10,7 +10,7 @@ public class Location : ScriptableObject
     [MultiLineProperty]
     public string _locationDescription;
     [MultiLineProperty]
-    public string _notableEvents;
+    public string _locationNotableEvents;
 
     public float _xCoordinate;
     public float _yCoordinate;

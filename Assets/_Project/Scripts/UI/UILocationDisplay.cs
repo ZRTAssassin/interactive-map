@@ -1,18 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UILocationDisplay : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Space(5f)]
+    [SerializeField] TMP_InputField _inputField;
+    [Space(5f)]
+    [SerializeField] TextMeshProUGUI _locationName;
+    [Space(5f)]
+    [SerializeField] TextMeshProUGUI _locationDescription;
+    [Space(5f)]
+    [SerializeField] TextMeshProUGUI _locationNotableEvents;
+
+    [Space(5f)] int _itemID;
+
+    public void GetNewRandomItem()
     {
-        
+        SetUI(Database.GetRandomLocation());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GetItemByID()
     {
-        
+        var input = _inputField.text.ToString();
+        SetUI(Database.GetLocationByID(input));
     }
+
+    void SetUI(Location location)
+    {
+        _locationName.text = location._locationName;
+        _locationDescription.text = location._locationDescription;
+        _locationNotableEvents.text = location._locationNotableEvents;
+    }
+
+
 }

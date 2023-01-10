@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f32b7ff4d15174b8abd77321f42ad4, type: 3}
   m_Name: Candle Bridge
   m_EditorClassIdentifier: 
+  _id: 000001
   _locationName: Candle Bridge
   _locationDescription: A bridge over a river.
-  _notableEvents: Players decided to blow it up
+  _locationNotableEvents: Players blew it up.
   _xCoordinate: 0
   _yCoordinate: 2
