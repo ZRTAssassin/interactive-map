@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Number1",
+                    "type": "Button",
+                    "id": "a07f3944-711a-4031-a9f7-0eb1799a8ef7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Zoom In",
                     "type": "Button",
                     "id": "70c12f1b-dd63-40db-b6fa-22d5726687e4",
@@ -210,6 +219,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "DragPanMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "353c95d9-e064-4934-a549-a7f0ac288f7e",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Number1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

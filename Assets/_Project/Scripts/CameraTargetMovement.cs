@@ -36,6 +36,8 @@ public class CameraTargetMovement : MonoBehaviour
     Vector2 _zoomInWheel;
     float _rotationInput;
 
+    public Inputs Inputs => _inputs;
+
 
     // adapt for zoom https://www.youtube.com/watch?v=5Ue0waWtkY4
     // https://www.youtube.com/watch?v=Qd3hkKM-UTI

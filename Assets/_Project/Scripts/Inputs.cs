@@ -55,6 +55,15 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Number1"",
+                    ""type"": ""Button"",
+                    ""id"": ""a07f3944-711a-4031-a9f7-0eb1799a8ef7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Zoom In"",
                     ""type"": ""Button"",
                     ""id"": ""70c12f1b-dd63-40db-b6fa-22d5726687e4"",
@@ -234,6 +243,17 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""action"": ""DragPanMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""353c95d9-e064-4934-a549-a7f0ac288f7e"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Number1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -357,6 +377,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         m_MapControls_Movement = m_MapControls.FindAction("Movement", throwIfNotFound: true);
         m_MapControls_Rotation = m_MapControls.FindAction("Rotation", throwIfNotFound: true);
         m_MapControls_DragPanMove = m_MapControls.FindAction("DragPanMove", throwIfNotFound: true);
+        m_MapControls_Number1 = m_MapControls.FindAction("Number1", throwIfNotFound: true);
         m_MapControls_ZoomIn = m_MapControls.FindAction("Zoom In", throwIfNotFound: true);
         m_MapControls_ZoomOut = m_MapControls.FindAction("Zoom Out", throwIfNotFound: true);
         m_MapControls_ZoomInWheel = m_MapControls.FindAction("ZoomInWheel", throwIfNotFound: true);
@@ -428,6 +449,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_MapControls_Movement;
     private readonly InputAction m_MapControls_Rotation;
     private readonly InputAction m_MapControls_DragPanMove;
+    private readonly InputAction m_MapControls_Number1;
     private readonly InputAction m_MapControls_ZoomIn;
     private readonly InputAction m_MapControls_ZoomOut;
     private readonly InputAction m_MapControls_ZoomInWheel;
@@ -439,6 +461,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_MapControls_Movement;
         public InputAction @Rotation => m_Wrapper.m_MapControls_Rotation;
         public InputAction @DragPanMove => m_Wrapper.m_MapControls_DragPanMove;
+        public InputAction @Number1 => m_Wrapper.m_MapControls_Number1;
         public InputAction @ZoomIn => m_Wrapper.m_MapControls_ZoomIn;
         public InputAction @ZoomOut => m_Wrapper.m_MapControls_ZoomOut;
         public InputAction @ZoomInWheel => m_Wrapper.m_MapControls_ZoomInWheel;
@@ -461,6 +484,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @DragPanMove.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnDragPanMove;
                 @DragPanMove.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnDragPanMove;
                 @DragPanMove.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnDragPanMove;
+                @Number1.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnNumber1;
+                @Number1.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnNumber1;
+                @Number1.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnNumber1;
                 @ZoomIn.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnZoomIn;
                 @ZoomIn.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnZoomIn;
                 @ZoomIn.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnZoomIn;
@@ -486,6 +512,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @DragPanMove.started += instance.OnDragPanMove;
                 @DragPanMove.performed += instance.OnDragPanMove;
                 @DragPanMove.canceled += instance.OnDragPanMove;
+                @Number1.started += instance.OnNumber1;
+                @Number1.performed += instance.OnNumber1;
+                @Number1.canceled += instance.OnNumber1;
                 @ZoomIn.started += instance.OnZoomIn;
                 @ZoomIn.performed += instance.OnZoomIn;
                 @ZoomIn.canceled += instance.OnZoomIn;
@@ -556,6 +585,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
         void OnDragPanMove(InputAction.CallbackContext context);
+        void OnNumber1(InputAction.CallbackContext context);
         void OnZoomIn(InputAction.CallbackContext context);
         void OnZoomOut(InputAction.CallbackContext context);
         void OnZoomInWheel(InputAction.CallbackContext context);
