@@ -15,6 +15,24 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Rotation",
+                    "type": "Value",
+                    "id": "541d7a5c-4798-4944-abe2-468fef21d1c7",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "DragPanMove",
+                    "type": "Button",
+                    "id": "63411bcb-43b6-4fc1-936c-5a5e31837d7c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Zoom In",
                     "type": "Button",
                     "id": "70c12f1b-dd63-40db-b6fa-22d5726687e4",
@@ -45,15 +63,6 @@
                     "name": "LeftClick",
                     "type": "Button",
                     "id": "73fad8f9-df4a-4578-a0da-c0cb2e7494ae",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "RightClick",
-                    "type": "Button",
-                    "id": "987fadd1-c684-49b5-b197-bb1bc03d48fc",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -141,9 +150,9 @@
                 {
                     "name": "",
                     "id": "4941f76d-249e-4094-a7a9-530da7de4f1d",
-                    "path": "<Mouse>/scroll/y",
+                    "path": "<Mouse>/scroll",
                     "interactions": "",
-                    "processors": "NormalizeVector2",
+                    "processors": "",
                     "groups": "",
                     "action": "ZoomInWheel",
                     "isComposite": false,
@@ -161,20 +170,53 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "1D Axis",
+                    "id": "404de2a6-133e-417a-8de2-6285f0b19794",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "374aaa11-ba42-4b11-9388-dc30d468f657",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "2fedca39-4fe4-440a-8486-c2ba474c25de",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
-                    "id": "f3522529-74b0-4a5e-8bff-df63c85b858e",
+                    "id": "9b44bfbb-a3bb-4826-b33a-7ed9eb6b1c4b",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightClick",
+                    "action": "DragPanMove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "Camera",
+            "name": "CameraOneWheel",
             "id": "9386e9b4-2a68-4231-992d-a3e0526aa149",
             "actions": [
                 {

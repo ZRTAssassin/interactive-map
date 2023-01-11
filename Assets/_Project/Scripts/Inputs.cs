@@ -37,6 +37,24 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Rotation"",
+                    ""type"": ""Value"",
+                    ""id"": ""541d7a5c-4798-4944-abe2-468fef21d1c7"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DragPanMove"",
+                    ""type"": ""Button"",
+                    ""id"": ""63411bcb-43b6-4fc1-936c-5a5e31837d7c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Zoom In"",
                     ""type"": ""Button"",
                     ""id"": ""70c12f1b-dd63-40db-b6fa-22d5726687e4"",
@@ -67,15 +85,6 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""name"": ""LeftClick"",
                     ""type"": ""Button"",
                     ""id"": ""73fad8f9-df4a-4578-a0da-c0cb2e7494ae"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""RightClick"",
-                    ""type"": ""Button"",
-                    ""id"": ""987fadd1-c684-49b5-b197-bb1bc03d48fc"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -163,9 +172,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4941f76d-249e-4094-a7a9-530da7de4f1d"",
-                    ""path"": ""<Mouse>/scroll/y"",
+                    ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ZoomInWheel"",
                     ""isComposite"": false,
@@ -183,20 +192,53 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""404de2a6-133e-417a-8de2-6285f0b19794"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""374aaa11-ba42-4b11-9388-dc30d468f657"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""2fedca39-4fe4-440a-8486-c2ba474c25de"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
-                    ""id"": ""f3522529-74b0-4a5e-8bff-df63c85b858e"",
+                    ""id"": ""9b44bfbb-a3bb-4826-b33a-7ed9eb6b1c4b"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RightClick"",
+                    ""action"": ""DragPanMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         },
         {
-            ""name"": ""Camera"",
+            ""name"": ""CameraOneWheel"",
             ""id"": ""9386e9b4-2a68-4231-992d-a3e0526aa149"",
             ""actions"": [
                 {
@@ -313,16 +355,17 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         // Map Controls
         m_MapControls = asset.FindActionMap("Map Controls", throwIfNotFound: true);
         m_MapControls_Movement = m_MapControls.FindAction("Movement", throwIfNotFound: true);
+        m_MapControls_Rotation = m_MapControls.FindAction("Rotation", throwIfNotFound: true);
+        m_MapControls_DragPanMove = m_MapControls.FindAction("DragPanMove", throwIfNotFound: true);
         m_MapControls_ZoomIn = m_MapControls.FindAction("Zoom In", throwIfNotFound: true);
         m_MapControls_ZoomOut = m_MapControls.FindAction("Zoom Out", throwIfNotFound: true);
         m_MapControls_ZoomInWheel = m_MapControls.FindAction("ZoomInWheel", throwIfNotFound: true);
         m_MapControls_LeftClick = m_MapControls.FindAction("LeftClick", throwIfNotFound: true);
-        m_MapControls_RightClick = m_MapControls.FindAction("RightClick", throwIfNotFound: true);
-        // Camera
-        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
-        m_Camera_Movement = m_Camera.FindAction("Movement", throwIfNotFound: true);
-        m_Camera_RotateCamera = m_Camera.FindAction("RotateCamera", throwIfNotFound: true);
-        m_Camera_ZoomCamera = m_Camera.FindAction("ZoomCamera", throwIfNotFound: true);
+        // CameraOneWheel
+        m_CameraOneWheel = asset.FindActionMap("CameraOneWheel", throwIfNotFound: true);
+        m_CameraOneWheel_Movement = m_CameraOneWheel.FindAction("Movement", throwIfNotFound: true);
+        m_CameraOneWheel_RotateCamera = m_CameraOneWheel.FindAction("RotateCamera", throwIfNotFound: true);
+        m_CameraOneWheel_ZoomCamera = m_CameraOneWheel.FindAction("ZoomCamera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -383,21 +426,23 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_MapControls;
     private IMapControlsActions m_MapControlsActionsCallbackInterface;
     private readonly InputAction m_MapControls_Movement;
+    private readonly InputAction m_MapControls_Rotation;
+    private readonly InputAction m_MapControls_DragPanMove;
     private readonly InputAction m_MapControls_ZoomIn;
     private readonly InputAction m_MapControls_ZoomOut;
     private readonly InputAction m_MapControls_ZoomInWheel;
     private readonly InputAction m_MapControls_LeftClick;
-    private readonly InputAction m_MapControls_RightClick;
     public struct MapControlsActions
     {
         private @Inputs m_Wrapper;
         public MapControlsActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_MapControls_Movement;
+        public InputAction @Rotation => m_Wrapper.m_MapControls_Rotation;
+        public InputAction @DragPanMove => m_Wrapper.m_MapControls_DragPanMove;
         public InputAction @ZoomIn => m_Wrapper.m_MapControls_ZoomIn;
         public InputAction @ZoomOut => m_Wrapper.m_MapControls_ZoomOut;
         public InputAction @ZoomInWheel => m_Wrapper.m_MapControls_ZoomInWheel;
         public InputAction @LeftClick => m_Wrapper.m_MapControls_LeftClick;
-        public InputAction @RightClick => m_Wrapper.m_MapControls_RightClick;
         public InputActionMap Get() { return m_Wrapper.m_MapControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -410,6 +455,12 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Movement.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnMovement;
+                @Rotation.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnRotation;
+                @Rotation.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnRotation;
+                @Rotation.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnRotation;
+                @DragPanMove.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnDragPanMove;
+                @DragPanMove.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnDragPanMove;
+                @DragPanMove.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnDragPanMove;
                 @ZoomIn.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnZoomIn;
                 @ZoomIn.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnZoomIn;
                 @ZoomIn.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnZoomIn;
@@ -422,9 +473,6 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @LeftClick.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnLeftClick;
                 @LeftClick.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnLeftClick;
                 @LeftClick.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnLeftClick;
-                @RightClick.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnRightClick;
-                @RightClick.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnRightClick;
-                @RightClick.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnRightClick;
             }
             m_Wrapper.m_MapControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -432,6 +480,12 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Rotation.started += instance.OnRotation;
+                @Rotation.performed += instance.OnRotation;
+                @Rotation.canceled += instance.OnRotation;
+                @DragPanMove.started += instance.OnDragPanMove;
+                @DragPanMove.performed += instance.OnDragPanMove;
+                @DragPanMove.canceled += instance.OnDragPanMove;
                 @ZoomIn.started += instance.OnZoomIn;
                 @ZoomIn.performed += instance.OnZoomIn;
                 @ZoomIn.canceled += instance.OnZoomIn;
@@ -444,47 +498,44 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @LeftClick.started += instance.OnLeftClick;
                 @LeftClick.performed += instance.OnLeftClick;
                 @LeftClick.canceled += instance.OnLeftClick;
-                @RightClick.started += instance.OnRightClick;
-                @RightClick.performed += instance.OnRightClick;
-                @RightClick.canceled += instance.OnRightClick;
             }
         }
     }
     public MapControlsActions @MapControls => new MapControlsActions(this);
 
-    // Camera
-    private readonly InputActionMap m_Camera;
-    private ICameraActions m_CameraActionsCallbackInterface;
-    private readonly InputAction m_Camera_Movement;
-    private readonly InputAction m_Camera_RotateCamera;
-    private readonly InputAction m_Camera_ZoomCamera;
-    public struct CameraActions
+    // CameraOneWheel
+    private readonly InputActionMap m_CameraOneWheel;
+    private ICameraOneWheelActions m_CameraOneWheelActionsCallbackInterface;
+    private readonly InputAction m_CameraOneWheel_Movement;
+    private readonly InputAction m_CameraOneWheel_RotateCamera;
+    private readonly InputAction m_CameraOneWheel_ZoomCamera;
+    public struct CameraOneWheelActions
     {
         private @Inputs m_Wrapper;
-        public CameraActions(@Inputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Camera_Movement;
-        public InputAction @RotateCamera => m_Wrapper.m_Camera_RotateCamera;
-        public InputAction @ZoomCamera => m_Wrapper.m_Camera_ZoomCamera;
-        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public CameraOneWheelActions(@Inputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_CameraOneWheel_Movement;
+        public InputAction @RotateCamera => m_Wrapper.m_CameraOneWheel_RotateCamera;
+        public InputAction @ZoomCamera => m_Wrapper.m_CameraOneWheel_ZoomCamera;
+        public InputActionMap Get() { return m_Wrapper.m_CameraOneWheel; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
-        public void SetCallbacks(ICameraActions instance)
+        public static implicit operator InputActionMap(CameraOneWheelActions set) { return set.Get(); }
+        public void SetCallbacks(ICameraOneWheelActions instance)
         {
-            if (m_Wrapper.m_CameraActionsCallbackInterface != null)
+            if (m_Wrapper.m_CameraOneWheelActionsCallbackInterface != null)
             {
-                @Movement.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMovement;
-                @RotateCamera.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateCamera;
-                @RotateCamera.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateCamera;
-                @RotateCamera.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateCamera;
-                @ZoomCamera.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnZoomCamera;
-                @ZoomCamera.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnZoomCamera;
-                @ZoomCamera.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnZoomCamera;
+                @Movement.started -= m_Wrapper.m_CameraOneWheelActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_CameraOneWheelActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_CameraOneWheelActionsCallbackInterface.OnMovement;
+                @RotateCamera.started -= m_Wrapper.m_CameraOneWheelActionsCallbackInterface.OnRotateCamera;
+                @RotateCamera.performed -= m_Wrapper.m_CameraOneWheelActionsCallbackInterface.OnRotateCamera;
+                @RotateCamera.canceled -= m_Wrapper.m_CameraOneWheelActionsCallbackInterface.OnRotateCamera;
+                @ZoomCamera.started -= m_Wrapper.m_CameraOneWheelActionsCallbackInterface.OnZoomCamera;
+                @ZoomCamera.performed -= m_Wrapper.m_CameraOneWheelActionsCallbackInterface.OnZoomCamera;
+                @ZoomCamera.canceled -= m_Wrapper.m_CameraOneWheelActionsCallbackInterface.OnZoomCamera;
             }
-            m_Wrapper.m_CameraActionsCallbackInterface = instance;
+            m_Wrapper.m_CameraOneWheelActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Movement.started += instance.OnMovement;
@@ -499,17 +550,18 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
             }
         }
     }
-    public CameraActions @Camera => new CameraActions(this);
+    public CameraOneWheelActions @CameraOneWheel => new CameraOneWheelActions(this);
     public interface IMapControlsActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnRotation(InputAction.CallbackContext context);
+        void OnDragPanMove(InputAction.CallbackContext context);
         void OnZoomIn(InputAction.CallbackContext context);
         void OnZoomOut(InputAction.CallbackContext context);
         void OnZoomInWheel(InputAction.CallbackContext context);
         void OnLeftClick(InputAction.CallbackContext context);
-        void OnRightClick(InputAction.CallbackContext context);
     }
-    public interface ICameraActions
+    public interface ICameraOneWheelActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnRotateCamera(InputAction.CallbackContext context);

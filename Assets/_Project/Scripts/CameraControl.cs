@@ -68,17 +68,17 @@ public class CameraControl : MonoBehaviour
 
         _lastPosition = this.transform.position;
 
-        _movement = _cameraActions.Camera.Movement;
-        _cameraActions.Camera.RotateCamera.performed += RotateCamera;
-        _cameraActions.Camera.ZoomCamera.performed += ZoomCamera;
-        _cameraActions.Camera.Enable();
+        _movement = _cameraActions.CameraOneWheel.Movement;
+        _cameraActions.CameraOneWheel.RotateCamera.performed += RotateCamera;
+        _cameraActions.CameraOneWheel.ZoomCamera.performed += ZoomCamera;
+        _cameraActions.CameraOneWheel.Enable();
     }
 
     void OnDisable()
     {
-        _cameraActions.Camera.RotateCamera.performed -= RotateCamera;
-        _cameraActions.Camera.ZoomCamera.performed -= ZoomCamera;
-        _cameraActions.Camera.Disable();
+        _cameraActions.CameraOneWheel.RotateCamera.performed -= RotateCamera;
+        _cameraActions.CameraOneWheel.ZoomCamera.performed -= ZoomCamera;
+        _cameraActions.CameraOneWheel.Disable();
     }
 
     void Update()

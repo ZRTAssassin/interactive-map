@@ -30,6 +30,6 @@ public class Database : MonoBehaviour
 
     public static Location GetRandomLocation()
     {
-        return _instance._locations._allLocations[Random.Range(0, _instance._locations._allLocations.Count())];
+        return _instance._locations._allLocations[Random.Range(0, _instance._locations._allLocations.Count)];
     }
 }
