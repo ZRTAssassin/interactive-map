@@ -27,7 +27,7 @@ public class CameraTargetMovement : MonoBehaviour
     [Space(10f)] [SerializeField] float _zoomInMax = 1;
     [SerializeField] float _zoomOutMax = 25;
 
-    Inputs _inputs;
+    InputHandler _inputs;
     Vector2 _moveInput;
     Vector2 _lastMousePosition;
     bool _zoomIn;
@@ -36,8 +36,6 @@ public class CameraTargetMovement : MonoBehaviour
     Vector2 _zoomInWheel;
     float _rotationInput;
 
-    public Inputs Inputs => _inputs;
-
 
     // adapt for zoom https://www.youtube.com/watch?v=5Ue0waWtkY4
     // https://www.youtube.com/watch?v=Qd3hkKM-UTI
@@ -45,11 +43,13 @@ public class CameraTargetMovement : MonoBehaviour
 
     void Awake()
     {
-        _inputs = new Inputs();
+        
+        
     }
 
     void Start()
     {
+        _inputs = GetComponent<InputHandler>();
         _camera.m_Lens.OrthographicSize = 1;
     }
 
@@ -97,29 +97,16 @@ public class CameraTargetMovement : MonoBehaviour
 
     void GetInput()
     {
-        _moveInput = _inputs.MapControls.Movement.ReadValue<Vector2>();
-        _rotationInput = _inputs.MapControls.Rotation.ReadValue<float>();
-        _zoomIn = _inputs.MapControls.ZoomIn.triggered;
-        _zoomOut = _inputs.MapControls.ZoomOut.triggered;
-        _zoomInWheel = _inputs.MapControls.ZoomInWheel.ReadValue<Vector2>();
+        _moveInput = _inputs.MoveInput;
+        _rotationInput = _inputs.RotationInput;
+        _zoomIn = _inputs.ZoomIn;
+        _zoomOut = _inputs.ZoomOut;
+        _zoomInWheel = _inputs.ZoomInWheel;
+        _dragPanMoveActive = _inputs.DragPanMoveActive;
+        _lastMousePosition = _inputs.LastMousePosition;
     }
 
-    void OnDragPanMoveStarted(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            _dragPanMoveActive = true;
-            _lastMousePosition = Mouse.current.position.ReadValue();
-        }
-    }
-
-    void OnDragPanMoveCancelled(InputAction.CallbackContext context)
-    {
-        if (context.canceled)
-        {
-            _dragPanMoveActive = false;
-        }
-    }
+    
 
     void HandleCameraZoom()
     {
@@ -174,17 +161,5 @@ public class CameraTargetMovement : MonoBehaviour
         }
     }
 
-    void OnEnable()
-    {
-        _inputs.MapControls.Enable();
-        _inputs.MapControls.DragPanMove.started += OnDragPanMoveStarted;
-        _inputs.MapControls.DragPanMove.canceled += OnDragPanMoveCancelled;
-    }
 
-    void OnDisable()
-    {
-        _inputs.MapControls.Disable();
-        _inputs.MapControls.DragPanMove.started -= OnDragPanMoveStarted;
-        _inputs.MapControls.DragPanMove.canceled -= OnDragPanMoveCancelled;
-    }
 }
