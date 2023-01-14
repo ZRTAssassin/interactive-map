@@ -6,8 +6,15 @@ using UnityEngine.InputSystem;
 
 public class PlacementController : MonoBehaviour
 {
-    [SerializeField] GameObject _placeableObjectPrefab;
+    // multi object placement
+    // https://www.youtube.com/watch?v=Omu0A4Mk5pE
+    
+    
+    
+    // this script needs refactored into a generic script.
+    // placeableobject or something, remove the spawning functionality and make the buttons call the functions?
     [SerializeField] bool _newObjectHotkey = false;
+    [SerializeField] GameObject _placeableObjectPrefab;
     [SerializeField] GameObject _currentPlaceableObject;
     
 
@@ -67,6 +74,25 @@ public class PlacementController : MonoBehaviour
             {
                 Destroy(_currentPlaceableObject);
             }
+            
+        }
+    }
+
+    public void SpawnObject(GameObject go)
+    {
+        HandleObjectSpawning(go);
+    }
+
+    void HandleObjectSpawning(GameObject go)
+    {
+        _newObjectHotkey = !_newObjectHotkey;
+        if (_currentPlaceableObject == null)
+        {
+            _currentPlaceableObject = Instantiate(go);
+        }
+        else
+        {
+            Destroy(go);
         }
     }
 

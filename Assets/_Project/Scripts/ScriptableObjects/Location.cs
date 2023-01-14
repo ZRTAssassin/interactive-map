@@ -1,13 +1,15 @@
 using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Location", menuName = "Assets/Create New Location")]
-public class Location : ScriptableObject
+
+public class Location : MonoBehaviour
 {
     public string _id;
     public string _locationName;
-    public Faction _faction;
+    [ValueDropdown("Factions")]
+    public List<Faction> Factions = FactionManager.Instance.GetFactions;
 
     [MultiLineProperty]
     public string _locationDescription;
@@ -18,11 +20,4 @@ public class Location : ScriptableObject
     public float _yCoordinate;
     
     
-}
-
-public enum Faction
-{
-    Faction1,
-    Faction2,
-    Faction3
 }
