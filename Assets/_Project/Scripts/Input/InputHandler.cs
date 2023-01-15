@@ -16,6 +16,8 @@ public class InputHandler : MonoBehaviour
     [SerializeField] Vector2 _zoomInWheel;
     [SerializeField] bool _number1;
     [SerializeField] bool _leftClick;
+    [SerializeField] bool _leftShift;
+    [SerializeField] bool _rightClick;
 
     Inputs _inputs;
     Inputs Inputs => _inputs;
@@ -30,6 +32,10 @@ public class InputHandler : MonoBehaviour
     public Vector2 ZoomInWheel => _zoomInWheel;
     public bool DragPanMoveActive => _dragPanMoveActive;
     public bool LeftClick => _leftClick;
+
+    public bool LeftShift => _leftShift;
+
+    public bool RightClick => _rightClick;
 
     void Awake()
     {
@@ -46,6 +52,7 @@ public class InputHandler : MonoBehaviour
         _zoomInWheel = _inputs.MapControls.ZoomInWheel.ReadValue<Vector2>();
         _number1Triggered = _inputs.MapControls.Number1.triggered;
         _leftClick = _inputs.MapControls.LeftClick.triggered;
+        _rightClick = _inputs.MapControls.RightClick.triggered;
 
     }
 
@@ -67,14 +74,32 @@ public class InputHandler : MonoBehaviour
             _dragPanMoveActive = false;
         }
     }
+    void OnLeftShiftStarted(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _leftShift = true;
+        }
+    }
+    void OnLeftShiftCancelled(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+        {
+            _leftShift = false;
+        }
+    }
 
     void OnEnable()
     {
         _inputs.MapControls.Enable();
         _inputs.MapControls.DragPanMove.started += OnDragPanMoveStarted;
         _inputs.MapControls.DragPanMove.canceled += OnDragPanMoveCancelled;
+        _inputs.MapControls.LeftShift.started += OnLeftShiftStarted;
+        _inputs.MapControls.LeftShift.canceled += OnLeftShiftCancelled;
         
     }
+
+    
 
 
     void OnDisable()
@@ -82,5 +107,7 @@ public class InputHandler : MonoBehaviour
         _inputs.MapControls.Disable();
         _inputs.MapControls.DragPanMove.started -= OnDragPanMoveStarted;
         _inputs.MapControls.DragPanMove.canceled -= OnDragPanMoveCancelled;
+        _inputs.MapControls.LeftShift.started -= OnLeftShiftStarted;
+        _inputs.MapControls.LeftShift.canceled -= OnLeftShiftCancelled;
     }
 }

@@ -8,15 +8,17 @@ public class PlacementController : MonoBehaviour
 {
     // multi object placement
     // https://www.youtube.com/watch?v=Omu0A4Mk5pE
-    
-    
-    
+
+
     // this script needs refactored into a generic script.
     // placeableobject or something, remove the spawning functionality and make the buttons call the functions?
     [SerializeField] bool _newObjectHotkey = false;
     [SerializeField] GameObject _placeableObjectPrefab;
     [SerializeField] GameObject _currentPlaceableObject;
-    
+    [SerializeField] Placeable _currentSelectedObject;
+
+    [SerializeField] LayerMask _layerMask;
+
 
     InputHandler _inputs;
 
@@ -24,8 +26,6 @@ public class PlacementController : MonoBehaviour
     void Start()
     {
         _inputs = GetComponent<InputHandler>();
-        
-
     }
 
     // Update is called once per frame
@@ -36,15 +36,26 @@ public class PlacementController : MonoBehaviour
         {
             MoveCurrentPlaceableObjectToMouse();
             ReleaseIfClicked();
+            DeleteIfRightClicked();
+        }
+    }
+
+    void DeleteIfRightClicked()
+    {
+        if (_inputs.RightClick)
+        {
+            Destroy(_currentPlaceableObject);
         }
     }
 
     void ReleaseIfClicked()
     {
-        if (_inputs.LeftClick)
+        if (_inputs.LeftClick && !_inputs.LeftShift)
         {
             // Debug.Log("aiopngpaoirngupsgn");
+            _currentPlaceableObject.GetComponent<LineRenderer>().enabled = false;
             _currentPlaceableObject = null;
+            _currentSelectedObject = null;
         }
     }
 
@@ -55,26 +66,36 @@ public class PlacementController : MonoBehaviour
         if (hit)
         {
 //            Debug.Log(hit.point);
-             _currentPlaceableObject.transform.position = hit.point;
+            _currentPlaceableObject.transform.position = hit.point;
             // _currentPlaceableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
         }
     }
 
     void GetInputs()
     {
-        
-        if (_inputs.Number1Triggered)
+        if (_inputs.LeftShift && _inputs.LeftClick)
         {
-            _newObjectHotkey = !_newObjectHotkey;
             if (_currentPlaceableObject == null)
             {
-                _currentPlaceableObject = Instantiate(_placeableObjectPrefab);
+                Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+                var hit = Physics2D.GetRayIntersection(ray, 200f, _layerMask);
+
+                if (hit)
+                {
+                    _currentSelectedObject = hit.transform.gameObject.GetComponent<Placeable>();
+                }
+
+                if (_currentSelectedObject != null)
+                {
+                    // Debug.Log(hit.collider.gameObject.name);
+                    var lineRenderer = _currentSelectedObject.GetComponent<LineRenderer>();
+                    _currentPlaceableObject = _currentSelectedObject.gameObject;
+                    if (lineRenderer != null)
+                    {
+                        lineRenderer.enabled = true;
+                    }
+                }
             }
-            else
-            {
-                Destroy(_currentPlaceableObject);
-            }
-            
         }
     }
 
@@ -98,6 +119,5 @@ public class PlacementController : MonoBehaviour
 
     void OnEnable()
     {
-        
     }
 }

@@ -98,6 +98,24 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftShift"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4c56b51-cc01-4a7f-bb5f-0cc968c5504e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""3ca9c4c3-9492-447b-878b-153fd641ad87"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -236,7 +254,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9b44bfbb-a3bb-4826-b33a-7ed9eb6b1c4b"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -247,11 +265,33 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""353c95d9-e064-4934-a549-a7f0ac288f7e"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""path"": ""<Keyboard>/delete"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Number1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3491b6ac-d22e-45e8-bfd0-008f6dcf4f53"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81d9008a-9614-4ecf-94bd-9a8b4dda8ca8"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftShift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -270,6 +310,8 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         m_MapControls_ZoomOut = m_MapControls.FindAction("Zoom Out", throwIfNotFound: true);
         m_MapControls_ZoomInWheel = m_MapControls.FindAction("ZoomInWheel", throwIfNotFound: true);
         m_MapControls_LeftClick = m_MapControls.FindAction("LeftClick", throwIfNotFound: true);
+        m_MapControls_LeftShift = m_MapControls.FindAction("LeftShift", throwIfNotFound: true);
+        m_MapControls_RightClick = m_MapControls.FindAction("RightClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -337,6 +379,8 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_MapControls_ZoomOut;
     private readonly InputAction m_MapControls_ZoomInWheel;
     private readonly InputAction m_MapControls_LeftClick;
+    private readonly InputAction m_MapControls_LeftShift;
+    private readonly InputAction m_MapControls_RightClick;
     public struct MapControlsActions
     {
         private @Inputs m_Wrapper;
@@ -349,6 +393,8 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         public InputAction @ZoomOut => m_Wrapper.m_MapControls_ZoomOut;
         public InputAction @ZoomInWheel => m_Wrapper.m_MapControls_ZoomInWheel;
         public InputAction @LeftClick => m_Wrapper.m_MapControls_LeftClick;
+        public InputAction @LeftShift => m_Wrapper.m_MapControls_LeftShift;
+        public InputAction @RightClick => m_Wrapper.m_MapControls_RightClick;
         public InputActionMap Get() { return m_Wrapper.m_MapControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -382,6 +428,12 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @LeftClick.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnLeftClick;
                 @LeftClick.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnLeftClick;
                 @LeftClick.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnLeftClick;
+                @LeftShift.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnLeftShift;
+                @LeftShift.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnLeftShift;
+                @LeftShift.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnLeftShift;
+                @RightClick.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnRightClick;
+                @RightClick.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnRightClick;
+                @RightClick.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnRightClick;
             }
             m_Wrapper.m_MapControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -410,6 +462,12 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @LeftClick.started += instance.OnLeftClick;
                 @LeftClick.performed += instance.OnLeftClick;
                 @LeftClick.canceled += instance.OnLeftClick;
+                @LeftShift.started += instance.OnLeftShift;
+                @LeftShift.performed += instance.OnLeftShift;
+                @LeftShift.canceled += instance.OnLeftShift;
+                @RightClick.started += instance.OnRightClick;
+                @RightClick.performed += instance.OnRightClick;
+                @RightClick.canceled += instance.OnRightClick;
             }
         }
     }
@@ -424,5 +482,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         void OnZoomOut(InputAction.CallbackContext context);
         void OnZoomInWheel(InputAction.CallbackContext context);
         void OnLeftClick(InputAction.CallbackContext context);
+        void OnLeftShift(InputAction.CallbackContext context);
+        void OnRightClick(InputAction.CallbackContext context);
     }
 }

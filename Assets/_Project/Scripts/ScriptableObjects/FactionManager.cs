@@ -45,7 +45,7 @@ public class FactionManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         foreach (var faction in _factions)
         {
-            Debug.Log(faction.Name);
+            // Debug.Log(faction.Name);
         }
     }
 
