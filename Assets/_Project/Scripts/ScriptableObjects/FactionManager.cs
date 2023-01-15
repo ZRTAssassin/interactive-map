@@ -10,9 +10,16 @@ public class FactionManager : MonoBehaviour
     // use custom property drawer to display in a popup/dropdown style in inspector. (https://www.youtube.com/watch?v=ThcSHbVh7xc)
     // ditch enum
 
-    List<Faction> _factions = new List<Faction>();
+    [SerializeField]
+    static List<Faction> _factions = new List<Faction>();
+
+    [SerializeField] GameObject _factionParent;
+
+    public GameObject FactionParent => _factionParent;
+
     public static FactionManager Instance { get; private set; }
     public List<Faction> GetFactions => _factions.ToList();
+    
 
     void Awake()
     {
@@ -30,15 +37,10 @@ public class FactionManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(DisplayFactions());
-        Debug.Log(_factions.Count);
+        // StartCoroutine(DisplayFactions());
+        // Debug.Log(_factions.Count);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     IEnumerator DisplayFactions()
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Database : MonoBehaviour
 {
-    public LocationDatabase _locations;
+    public LocationDatabase Locations;
     public static Database Instance => _instance;
     static Database _instance;
 
@@ -23,13 +23,13 @@ public class Database : MonoBehaviour
         }
     }
 
-    public static Location GetLocationByID(string id)
+    public static Location GetLocationByName(string name)
     {
-        return _instance._locations._allLocations.FirstOrDefault(t => t._id == id);
+        return _instance.Locations.AllLocations.FirstOrDefault(t => t.LocationName == name);
     }
 
     public static Location GetRandomLocation()
     {
-        return _instance._locations._allLocations[Random.Range(0, _instance._locations._allLocations.Count)];
+        return _instance.Locations.AllLocations[Random.Range(0, _instance.Locations.AllLocations.Count)];
     }
 }

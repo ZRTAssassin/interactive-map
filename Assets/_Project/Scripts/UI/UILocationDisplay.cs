@@ -21,7 +21,7 @@ public class UILocationDisplay : MonoBehaviour
     public void GetItemByID()
     {
         var input = _inputField.text.ToString();
-        SetUI(Database.GetLocationByID(input));
+        SetUI(Database.GetLocationByName(input));
     }
 
     void SetUI(Location location)
@@ -33,9 +33,9 @@ public class UILocationDisplay : MonoBehaviour
             _locationNotableEvents.text = String.Empty;
             return;
         }
-        _locationName.text = location._locationName;
-        _locationDescription.text = location._locationDescription;
-        _locationNotableEvents.text = location._locationNotableEvents;
+        _locationName.text = location.LocationName;
+        _locationDescription.text = location.LocationDescription;
+        _locationNotableEvents.text = location.LocationNotableEvents;
         
     }
 }

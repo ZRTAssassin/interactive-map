@@ -25,8 +25,14 @@ public class FactionDiskInterfacer : MonoBehaviour
         }
 
         LoadFactionsFromDirectory();
+
         UpdateFactionManager();
 
+        SaveCurrentFactionsToDisk();
+    }
+
+    void SaveCurrentFactionsToDisk()
+    {
         if (_usePersistentDataPath)
         {
             CreateAtPersistentPath();
@@ -39,12 +45,39 @@ public class FactionDiskInterfacer : MonoBehaviour
 
     void UpdateFactionManager()
     {
-        _dummyFactions.Add("New Player Faction");
-        foreach (var dummyFaction in _dummyFactions)
+        _dummyFactions.Add("New Player Faction-255.123.126.50");
+
+        for (int i = 0; i < 2; i++)
         {
-            Faction newFaction = new Faction(dummyFaction);
-            FactionManager.Instance.AddFaction(newFaction);
+            var components = _dummyFactions[i].Split("-");
+            var newObject = new GameObject(components[0]);
+            var colorComponents = components[1].Split(".").Select(int.Parse).ToArray();
+            newObject.transform.SetParent(FactionManager.Instance.FactionParent.transform);
+            newObject.AddComponent<Faction>();
+            newObject.GetComponent<Faction>()
+                .SetColor(
+                    colorComponents[0],
+                    colorComponents[1],
+                    colorComponents[2],
+                    colorComponents[3]
+                );
         }
+        
+        /*foreach (var dummyFaction in _dummyFactions)
+        {
+            var components = dummyFaction.Split("-");
+            var newObject = new GameObject(components[0]);
+            var colorComponents = components[1].Split(".").Select(int.Parse).ToArray();
+            newObject.transform.SetParent(FactionManager.Instance.FactionParent.transform);
+            newObject.AddComponent<Faction>();
+            newObject.GetComponent<Faction>()
+                .SetColor(
+                    colorComponents[0],
+                    colorComponents[1],
+                    colorComponents[2],
+                    colorComponents[3]
+                );
+        }*/
     }
 
     string PopulateOutputString(List<Faction> factions)
@@ -52,7 +85,7 @@ public class FactionDiskInterfacer : MonoBehaviour
         string factionOutput = String.Empty;
         foreach (var faction in factions)
         {
-            factionOutput = String.Concat(factionOutput, faction.Name + "\n");
+            factionOutput = String.Concat(factionOutput, faction.Name + "-" + faction.ColorString + "\n");
 //            Debug.Log(factionOutput);
         }
 

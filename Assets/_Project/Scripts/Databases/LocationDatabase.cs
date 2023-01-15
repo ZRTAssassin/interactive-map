@@ -6,5 +6,5 @@ using UnityEngine;
 public class LocationDatabase : ScriptableObject
 {
     // https://www.youtube.com/watch?v=yo80rh7K-2k
-    public List<Location> _allLocations;
+    public List<Location> AllLocations;
 }
