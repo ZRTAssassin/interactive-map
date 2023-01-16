@@ -1,0 +1,45 @@
+﻿{
+  "jsonFactions": [
+    {
+      "name": "The Billhooks",
+      "color": "Magenta",
+      "type": "Gang"
+    },
+    {
+      "name": "The Crows",
+      "color": "Black",
+      "type": "Gang"
+    },
+    {
+      "name": "The Gray Cloaks",
+      "color": "Gray",
+      "type": "Gang"
+    },
+    {
+      "name": "The Grinders",
+      "color": "Blue",
+      "type": "Gang"
+    },
+    {
+      "name": "The Lampblacks",
+      "color": "Yellow",
+      "type": "Gang"
+    },
+    {
+      "name": "The Lost",
+      "color": "Green",
+      "type": "Gang"
+    },
+    {
+      "name": "The Red Sashes",
+      "color": "Red",
+      "type": "Gang"
+    },
+    {
+      "name": "The Silver Nails",
+      "color": "White",
+      "type": "Gang"
+    }
+  ], 
+  "collectionName": "factions"
+}

@@ -1,5 +1,5 @@
-The Billhooks
-The Brigade
+The Billhooks-255.255.255.100
+The Brigade-0.0.0.100
 Bluecoats
 Cabbies
 The Church of the Ecstasy of the Flesh
