@@ -54,8 +54,8 @@ public class FactionDiskInterfacer : MonoBehaviour
             var newObject = new GameObject(components[0]);
             var colorComponents = components[1].Split(".").Select(int.Parse).ToArray();
             newObject.transform.SetParent(FactionManager.Instance.FactionParent.transform);
-            newObject.AddComponent<Faction>();
-            newObject.GetComponent<Faction>()
+            newObject.AddComponent<FactionGameobject>();
+            newObject.GetComponent<FactionGameobject>()
                 .SetColor(
                     colorComponents[0],
                     colorComponents[1],
@@ -81,7 +81,7 @@ public class FactionDiskInterfacer : MonoBehaviour
         }*/
     }
 
-    string PopulateOutputString(List<Faction> factions)
+    string PopulateOutputString(List<FactionGameobject> factions)
     {
         string factionOutput = String.Empty;
         foreach (var faction in factions)

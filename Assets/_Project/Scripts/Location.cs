@@ -10,7 +10,7 @@ public class Location : MonoBehaviour
 
     [SerializeField] SpriteRenderer _spriteRenderer;
     [SerializeField] string _locationName;
-    [SerializeField] Faction _currentController;
+    [SerializeField] FactionGameobject _currentController;
     [MultiLineProperty] string _locationDescription;
     [MultiLineProperty] string _locationNotableEvents;
 

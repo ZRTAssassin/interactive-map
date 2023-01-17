@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Faction : MonoBehaviour
+public class FactionGameobject : MonoBehaviour
 {
     /*
      public Faction (string name)

@@ -11,14 +11,14 @@ public class FactionManager : MonoBehaviour
     // ditch enum
 
     [SerializeField]
-    static List<Faction> _factions = new List<Faction>();
+    static List<FactionGameobject> _factions = new List<FactionGameobject>();
 
     [SerializeField] GameObject _factionParent;
 
     public GameObject FactionParent => _factionParent;
 
     public static FactionManager Instance { get; private set; }
-    public List<Faction> GetFactions => _factions.ToList();
+    public List<FactionGameobject> GetFactions => _factions.ToList();
     
 
     void Awake()
@@ -51,13 +51,13 @@ public class FactionManager : MonoBehaviour
         }
     }
 
-    public void AddFaction(Faction faction)
+    public void AddFaction(FactionGameobject factionGameobject)
     {
-        _factions.Add(faction);
+        _factions.Add(factionGameobject);
     }
 
-    public void RemoveFaction(Faction faction)
+    public void RemoveFaction(FactionGameobject factionGameobject)
     {
-        _factions.Remove(faction);
+        _factions.Remove(factionGameobject);
     }
 }
