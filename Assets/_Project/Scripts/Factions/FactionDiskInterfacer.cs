@@ -48,7 +48,7 @@ public class FactionDiskInterfacer : MonoBehaviour
     {
         _dummyFactions.Add("New Player Faction-255.123.126.50");
 
-        for (int i = 0; i < 2; i++)
+        /*for (int i = 0; i < 2; i++)
         {
             var components = _dummyFactions[i].Split("-");
             var newObject = new GameObject(components[0]);
@@ -62,7 +62,7 @@ public class FactionDiskInterfacer : MonoBehaviour
                     colorComponents[2],
                     colorComponents[3]
                 );
-        }
+        }*/
         
         /*foreach (var dummyFaction in _dummyFactions)
         {
