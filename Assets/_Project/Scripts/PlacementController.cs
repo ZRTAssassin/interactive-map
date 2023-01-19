@@ -97,6 +97,20 @@ public class PlacementController : MonoBehaviour
                 }
             }
         }
+
+        if (_inputs.LeftClick && _currentPlaceableObject == null)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            var hit = Physics2D.GetRayIntersection(ray, 200f, _layerMask);
+            if (hit)
+            {
+                var location = hit.collider.GetComponent<Location>();
+                if (location != null)
+                {
+                    location.NewOwner("The Billhooks");
+                }
+            }
+        }
     }
 
     public void SpawnObject(GameObject go)

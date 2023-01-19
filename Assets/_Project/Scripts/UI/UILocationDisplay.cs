@@ -34,8 +34,7 @@ public class UILocationDisplay : MonoBehaviour
             return;
         }
         _locationName.text = location.LocationName;
-        _locationDescription.text = location.LocationDescription;
-        _locationNotableEvents.text = location.LocationNotableEvents;
+
         
     }
 }
