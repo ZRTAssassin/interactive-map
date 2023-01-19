@@ -11,8 +11,7 @@ public class Location : MonoBehaviour
     [SerializeField] string _locationName;
     [SerializeField] FactionJsonReader.Faction _currentController;
 
-    [SerializeField]
-    FactionJsonReader _factionJsonReader;
+    [SerializeField] FactionJsonReader _factionJsonReader;
 
 
     public string LocationName => _locationName;
@@ -23,18 +22,15 @@ public class Location : MonoBehaviour
         _locationName = gameObject.name;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _factionJsonReader = FindObjectOfType<FactionJsonReader>();
-
     }
 
     void Update()
     {
         if (_currentController != null)
         {
-            if (_spriteRenderer.color.a > 0.24)
-            {
-                _spriteRenderer.color = new Color(_currentController.Color.r, _currentController.Color.g,
-                    _currentController.Color.b, 0.25f);
-            }
+            _spriteRenderer.color = new Color(_currentController.Color.r, _currentController.Color.g,
+                _currentController.Color.b, 0.25f);
+
             Debug.Log("CALLED");
         }
     }

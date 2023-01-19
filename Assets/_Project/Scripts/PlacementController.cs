@@ -19,6 +19,8 @@ public class PlacementController : MonoBehaviour
 
     [SerializeField] LayerMask _layerMask;
 
+    public event Action<Location> LocationSelectedEvent = delegate { };
+
 
     InputHandler _inputs;
 
@@ -107,6 +109,7 @@ public class PlacementController : MonoBehaviour
                 var location = hit.collider.GetComponent<Location>();
                 if (location != null)
                 {
+                    LocationSelectedEvent(location);
                     location.NewOwner("The Billhooks");
                 }
             }
