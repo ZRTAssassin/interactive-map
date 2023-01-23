@@ -51,9 +51,25 @@ public class InputHandler : MonoBehaviour
         _zoomOut = _inputs.MapControls.ZoomOut.triggered;
         _zoomInWheel = _inputs.MapControls.ZoomInWheel.ReadValue<Vector2>();
         _number1Triggered = _inputs.MapControls.Number1.triggered;
-        _leftClick = _inputs.MapControls.LeftClick.triggered;
+        _leftClick = _inputs.MapControls.LeftClick.triggered || _inputs.ShapeBuilderControls.LeftClick.triggered;
         _rightClick = _inputs.MapControls.RightClick.triggered;
 
+
+       //_leftClick = _inputs.ShapeBuilderControls.LeftClick.triggered;
+
+
+    }
+
+    public void SwapControlsToLines()
+    {
+        _inputs.MapControls.Disable();
+        _inputs.ShapeBuilderControls.Enable();
+    }
+
+    public void SwapControlsToMap()
+    {
+        _inputs.ShapeBuilderControls.Enable();
+        _inputs.MapControls.Enable();
     }
 
 
@@ -91,12 +107,12 @@ public class InputHandler : MonoBehaviour
 
     void OnEnable()
     {
-        _inputs.MapControls.Enable();
+        SwapControlsToMap();
         _inputs.MapControls.DragPanMove.started += OnDragPanMoveStarted;
         _inputs.MapControls.DragPanMove.canceled += OnDragPanMoveCancelled;
         _inputs.MapControls.LeftShift.started += OnLeftShiftStarted;
         _inputs.MapControls.LeftShift.canceled += OnLeftShiftCancelled;
-        
+
     }
 
     

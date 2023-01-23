@@ -50,7 +50,7 @@ public class CameraTargetMovement : MonoBehaviour
     void Start()
     {
         _inputs = GetComponent<InputHandler>();
-        _camera.m_Lens.OrthographicSize = 1;
+        _camera.m_Lens.OrthographicSize = 10;
     }
 
     void Update()

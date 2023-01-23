@@ -296,6 +296,34 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Shape Builder Controls"",
+            ""id"": ""aabf667a-2263-464e-ada7-9255f80671f7"",
+            ""actions"": [
+                {
+                    ""name"": ""LeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""7abed3a3-8198-406c-86c4-e42a597ac161"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""450c2040-a302-4159-804a-736938c9760a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -312,6 +340,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         m_MapControls_LeftClick = m_MapControls.FindAction("LeftClick", throwIfNotFound: true);
         m_MapControls_LeftShift = m_MapControls.FindAction("LeftShift", throwIfNotFound: true);
         m_MapControls_RightClick = m_MapControls.FindAction("RightClick", throwIfNotFound: true);
+        // Shape Builder Controls
+        m_ShapeBuilderControls = asset.FindActionMap("Shape Builder Controls", throwIfNotFound: true);
+        m_ShapeBuilderControls_LeftClick = m_ShapeBuilderControls.FindAction("LeftClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -472,6 +503,39 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         }
     }
     public MapControlsActions @MapControls => new MapControlsActions(this);
+
+    // Shape Builder Controls
+    private readonly InputActionMap m_ShapeBuilderControls;
+    private IShapeBuilderControlsActions m_ShapeBuilderControlsActionsCallbackInterface;
+    private readonly InputAction m_ShapeBuilderControls_LeftClick;
+    public struct ShapeBuilderControlsActions
+    {
+        private @Inputs m_Wrapper;
+        public ShapeBuilderControlsActions(@Inputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LeftClick => m_Wrapper.m_ShapeBuilderControls_LeftClick;
+        public InputActionMap Get() { return m_Wrapper.m_ShapeBuilderControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ShapeBuilderControlsActions set) { return set.Get(); }
+        public void SetCallbacks(IShapeBuilderControlsActions instance)
+        {
+            if (m_Wrapper.m_ShapeBuilderControlsActionsCallbackInterface != null)
+            {
+                @LeftClick.started -= m_Wrapper.m_ShapeBuilderControlsActionsCallbackInterface.OnLeftClick;
+                @LeftClick.performed -= m_Wrapper.m_ShapeBuilderControlsActionsCallbackInterface.OnLeftClick;
+                @LeftClick.canceled -= m_Wrapper.m_ShapeBuilderControlsActionsCallbackInterface.OnLeftClick;
+            }
+            m_Wrapper.m_ShapeBuilderControlsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @LeftClick.started += instance.OnLeftClick;
+                @LeftClick.performed += instance.OnLeftClick;
+                @LeftClick.canceled += instance.OnLeftClick;
+            }
+        }
+    }
+    public ShapeBuilderControlsActions @ShapeBuilderControls => new ShapeBuilderControlsActions(this);
     public interface IMapControlsActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -484,5 +548,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         void OnLeftClick(InputAction.CallbackContext context);
         void OnLeftShift(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
+    }
+    public interface IShapeBuilderControlsActions
+    {
+        void OnLeftClick(InputAction.CallbackContext context);
     }
 }

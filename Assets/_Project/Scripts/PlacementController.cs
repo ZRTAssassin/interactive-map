@@ -1,11 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.U2D;
 
 public class PlacementController : MonoBehaviour
 {
+    [SerializeField] List<Vector3> _points = new List<Vector3>();
+    [SerializeField] List<GameObject> _pointMarkers = new List<GameObject>();
+    [SerializeField] LayerMask _splinePlacementLayerMask;
+    [SerializeField] GameObject _placementParent;
+    [SerializeField] GameObject _splineMarker;
+    [SerializeField] GameObject _locationParent;
+    [SerializeField] GameObject _locationPrefab;
+
+
     // multi object placement
     // https://www.youtube.com/watch?v=Omu0A4Mk5pE
 
@@ -33,13 +46,21 @@ public class PlacementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInputs();
-        if (_currentPlaceableObject != null)
+        if (!IsMouseOverUI())
         {
-            MoveCurrentPlaceableObjectToMouse();
-            ReleaseIfClicked();
-            DeleteIfRightClicked();
+            GetInputs();
+            if (_currentPlaceableObject != null)
+            {
+                MoveCurrentPlaceableObjectToMouse();
+                ReleaseIfClicked();
+                DeleteIfRightClicked();
+            }
         }
+    }
+
+    bool IsMouseOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
     }
 
     void DeleteIfRightClicked()
@@ -103,6 +124,46 @@ public class PlacementController : MonoBehaviour
         if (_inputs.LeftClick && _currentPlaceableObject == null)
         {
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            var hit = Physics2D.GetRayIntersection(ray, 200f, _splinePlacementLayerMask);
+            if (hit)
+            {
+                var go = Instantiate(_splineMarker, new Vector3(hit.point.x, hit.point.y), Quaternion.identity);
+                _pointMarkers.Add(go);
+
+                if (_points.Count > 0)
+                {
+                    var distance = Vector3.Distance(_points[0], hit.point);
+                    Debug.Log(distance);
+
+                    if (distance < 0.1f)
+                    {
+                        Debug.Log($"Super close man, {distance})");
+                        var newLocation = Instantiate(_locationPrefab, _placementParent.transform);
+                        // newLocation.AddComponent<Location>();
+                        var spriteShapeTest = newLocation.GetComponent<SpriteShapeTest>();
+                        spriteShapeTest.UpdateSprite(_points);
+
+                        _points.Clear();
+                        foreach (var marker in _pointMarkers)
+                        {
+                            Destroy(marker);
+                        }
+
+                        _pointMarkers.Clear();
+                    }
+                    else
+                    {
+                        _points.Add(hit.point);
+                    }
+                }
+                else
+                {
+                    _points.Add(hit.point);
+                }
+            }
+
+
+            /*Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             var hit = Physics2D.GetRayIntersection(ray, 200f, _layerMask);
             if (hit)
             {
@@ -110,9 +171,9 @@ public class PlacementController : MonoBehaviour
                 if (location != null)
                 {
                     LocationSelectedEvent(location);
-                    location.NewOwner("The Billhooks");
+                    // location.NewOwner("The Billhooks");
                 }
-            }
+            }*/
         }
     }
 
@@ -137,4 +198,20 @@ public class PlacementController : MonoBehaviour
     void OnEnable()
     {
     }
+
+    [ContextMenu("Debug Points")]
+    void DebugPoints()
+    {
+        foreach (var point in _points)
+        {
+            Debug.Log($"{point.x}, {point.y}");
+        }
+    }
+}
+
+public enum PlacementState
+{
+    None,
+    Placeable,
+    Shape
 }
