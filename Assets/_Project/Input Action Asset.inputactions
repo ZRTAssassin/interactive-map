@@ -274,6 +274,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Shape Builder Controls",
+            "id": "aabf667a-2263-464e-ada7-9255f80671f7",
+            "actions": [
+                {
+                    "name": "LeftClick",
+                    "type": "Button",
+                    "id": "7abed3a3-8198-406c-86c4-e42a597ac161",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "450c2040-a302-4159-804a-736938c9760a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

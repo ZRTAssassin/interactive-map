@@ -1,0 +1,58 @@
+{
+  "factions": [
+    {
+      "Name": "The Billhooks",
+      "Color": "Magenta",
+      "Type": "Gang",
+      "Id": "bf35a4ea-1b86-45c3-8cd1-6691874232b6"
+    },
+    {
+      "Name": "The Crows",
+      "Color": "Black",
+      "Type": "Gang",
+      "Id": "04861ce1-d201-4dd0-9d85-2619f37e3026"
+    },
+    {
+      "Name": "The Gray Cloaks",
+      "Color": "Gray",
+      "Type": "Gang",
+      "Id": "538424b9-ff8d-42eb-a2a4-a220dd5b6095"
+    },
+    {
+      "Name": "The Grinders",
+      "Color": "Blue",
+      "Type": "Gang",
+      "Id": "f39af89b-5ec2-4798-be56-8d379a506410"
+    },
+    {
+      "Name": "The Lampblacks",
+      "Color": "Yellow",
+      "Type": "Gang",
+      "Id": "14317cf2-58d5-4756-95c5-01eec11c3503"
+    },
+    {
+      "Name": "The Lost",
+      "Color": "Green",
+      "Type": "Gang",
+      "Id": "c798b741-00f4-4374-9c34-41e2b0f53158"
+    },
+    {
+      "Name": "The Red Sashes",
+      "Color": "Red",
+      "Type": "Gang",
+      "Id": "6495fcbf-2aa9-43fd-82e2-2b01f27676b6"
+    },
+    {
+      "Name": "The Silver Nails",
+      "Color": "White",
+      "Type": "Gang",
+      "Id": "a2c958f6-33ec-4718-a431-23084bb956df"
+    },
+    {
+      "Name": "Player Faction",
+      "Color": "",
+      "Type": "Player",
+      "Id": "bcf7fd17-36b1-48b2-b08d-6355d3990a3e"
+    }
+  ]
+}

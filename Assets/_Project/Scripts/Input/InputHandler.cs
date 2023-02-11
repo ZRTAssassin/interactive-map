@@ -21,7 +21,9 @@ public class InputHandler : MonoBehaviour
 
     Inputs _inputs;
     Inputs Inputs => _inputs;
-    
+
+    #region Public Properties
+
     public bool Number1Triggered => _number1Triggered;
     public bool Number1 => _number1;
     public Vector2 MoveInput => _moveInput;
@@ -37,41 +39,52 @@ public class InputHandler : MonoBehaviour
 
     public bool RightClick => _rightClick;
 
+    public bool MapControlsActive => _inputs.MapControls.enabled;
+    public bool ShapeBuilderActive => _inputs.ShapeBuilderControls.enabled;
+
+    #endregion
+
     void Awake()
     {
         _inputs = new Inputs();
-        
     }
 
     void Update()
     {
-        _moveInput = _inputs.MapControls.Movement.ReadValue<Vector2>();
-        _rotationInput = _inputs.MapControls.Rotation.ReadValue<float>();
-        _zoomIn = _inputs.MapControls.ZoomIn.triggered;
-        _zoomOut = _inputs.MapControls.ZoomOut.triggered;
-        _zoomInWheel = _inputs.MapControls.ZoomInWheel.ReadValue<Vector2>();
-        _number1Triggered = _inputs.MapControls.Number1.triggered;
-        _leftClick = _inputs.MapControls.LeftClick.triggered || _inputs.ShapeBuilderControls.LeftClick.triggered;
-        _rightClick = _inputs.MapControls.RightClick.triggered;
+
+        if (_inputs.MapControls.enabled)
+        {
+            _leftClick = _inputs.MapControls.LeftClick.triggered;
+            _moveInput = _inputs.MapControls.Movement.ReadValue<Vector2>();
+            _rotationInput = _inputs.MapControls.Rotation.ReadValue<float>();
+            _zoomIn = _inputs.MapControls.ZoomIn.triggered;
+            _zoomOut = _inputs.MapControls.ZoomOut.triggered;
+            _zoomInWheel = _inputs.MapControls.ZoomInWheel.ReadValue<Vector2>();
+            _number1Triggered = _inputs.MapControls.Number1.triggered;
+            _rightClick = _inputs.MapControls.RightClick.triggered;
+        }
+        else if (_inputs.ShapeBuilderControls.enabled)
+        {
+            _leftClick = _inputs.ShapeBuilderControls.LeftClick.triggered;
+        }
 
 
-       //_leftClick = _inputs.ShapeBuilderControls.LeftClick.triggered;
-
-
+        //_leftClick = _inputs.ShapeBuilderControls.LeftClick.triggered;
     }
 
     public void SwapControlsToLines()
     {
         _inputs.MapControls.Disable();
         _inputs.ShapeBuilderControls.Enable();
+        // Debug.Log($"SwapControlsToLines() called. Map controls: {_inputs.MapControls.enabled}, ShapeBuilder Controls: {_inputs.ShapeBuilderControls.enabled}");
     }
 
     public void SwapControlsToMap()
     {
-        _inputs.ShapeBuilderControls.Enable();
+        _inputs.ShapeBuilderControls.Disable();
         _inputs.MapControls.Enable();
+        // Debug.Log($"SwapControlsToMap() called. Map controls: {_inputs.MapControls.enabled}, ShapeBuilder Controls: {_inputs.ShapeBuilderControls.enabled}");
     }
-
 
 
     void OnDragPanMoveStarted(InputAction.CallbackContext context)
@@ -90,6 +103,7 @@ public class InputHandler : MonoBehaviour
             _dragPanMoveActive = false;
         }
     }
+
     void OnLeftShiftStarted(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -97,6 +111,7 @@ public class InputHandler : MonoBehaviour
             _leftShift = true;
         }
     }
+
     void OnLeftShiftCancelled(InputAction.CallbackContext context)
     {
         if (context.canceled)
@@ -112,10 +127,7 @@ public class InputHandler : MonoBehaviour
         _inputs.MapControls.DragPanMove.canceled += OnDragPanMoveCancelled;
         _inputs.MapControls.LeftShift.started += OnLeftShiftStarted;
         _inputs.MapControls.LeftShift.canceled += OnLeftShiftCancelled;
-
     }
-
-    
 
 
     void OnDisable()

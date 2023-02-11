@@ -1,45 +1,123 @@
-﻿{
-  "jsonFactions": [
+{
+  "factions": [
     {
-      "name": "The Billhooks",
-      "color": "Magenta",
-      "type": "Gang"
+      "Name": "The Billhooks",
+      "Color": {
+        "r": 1.0,
+        "g": 0.0,
+        "b": 1.0,
+        "a": 0.5
+      },
+      "Type": "Gang",
+      "Id": "bf35a4ea-1b86-45c3-8cd1-6691874232b6",
+      "ColorString": "CB6862"
     },
     {
-      "name": "The Crows",
-      "color": "Black",
-      "type": "Gang"
+      "Name": "The Crows",
+      "Color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.5
+      },
+      "Type": "Gang",
+      "Id": "04861ce1-d201-4dd0-9d85-2619f37e3026",
+      "ColorString": "000000"
     },
     {
-      "name": "The Gray Cloaks",
-      "color": "Gray",
-      "type": "Gang"
+      "Name": "The Fog Hounds",
+      "Color": {
+        "r": 0.501960813999176,
+        "g": 0.501960813999176,
+        "b": 0.501960813999176,
+        "a": 0.5
+      },
+      "Type": "Gang",
+      "Id": "088d650d-3466-4a45-ab9b-c352d41d2371",
+      "ColorString": "8FA2A7"
+    },{
+      "Name": "The Gray Cloaks",
+      "Color": {
+        "r": 0.501960813999176,
+        "g": 0.501960813999176,
+        "b": 0.501960813999176,
+        "a": 0.5
+      },
+      "Type": "Gang",
+      "Id": "538424b9-ff8d-42eb-a2a4-a220dd5b6095",
+      "ColorString": "808080"
     },
     {
-      "name": "The Grinders",
-      "color": "Blue",
-      "type": "Gang"
+      "Name": "The Grinders",
+      "Color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 1.0,
+        "a": 0.5
+      },
+      "Type": "Gang",
+      "Id": "f39af89b-5ec2-4798-be56-8d379a506410",
+      "ColorString": "006994"
     },
     {
-      "name": "The Lampblacks",
-      "color": "Yellow",
-      "type": "Gang"
+      "Name": "The Lampblacks",
+      "Color": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 0.0,
+        "a": 0.5
+      },
+      "Type": "Gang",
+      "Id": "14317cf2-58d5-4756-95c5-01eec11c3503",
+      "ColorString": "9B870C"
     },
     {
-      "name": "The Lost",
-      "color": "Green",
-      "type": "Gang"
+      "Name": "The Lost",
+      "Color": {
+        "r": 0.0,
+        "g": 1.0,
+        "b": 0.0,
+        "a": 0.5
+      },
+      "Type": "Gang",
+      "Id": "c798b741-00f4-4374-9c34-41e2b0f53158",
+      "ColorString": "4B5320"
     },
     {
-      "name": "The Red Sashes",
-      "color": "Red",
-      "type": "Gang"
+      "Name": "The Red Sashes",
+      "Color": {
+        "r": 1.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.5
+      },
+      "Type": "Gang",
+      "Id": "6495fcbf-2aa9-43fd-82e2-2b01f27676b6",
+      "ColorString": "991600"
     },
     {
-      "name": "The Silver Nails",
-      "color": "White",
-      "type": "Gang"
+      "Name": "The Silver Nails",
+      "Color": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 0.5
+      },
+      "Type": "Gang",
+      "Id": "a2c958f6-33ec-4718-a431-23084bb956df",
+      "ColorString": "C0C0C0"
+    },
+    {
+      "Name": "Player Faction",
+      "Color": {
+        "r": 0.003921568859368563,
+        "g": 0.003921568859368563,
+        "b": 0.003921568859368563,
+        "a": 0.5
+      },
+      "Type": "Player",
+      "Id": "bcf7fd17-36b1-48b2-b08d-6355d3990a3e",
+      "ColorString": "010101"
     }
-  ], 
-  "collectionName": "factions"
+  ]
 }

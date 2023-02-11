@@ -123,57 +123,61 @@ public class PlacementController : MonoBehaviour
 
         if (_inputs.LeftClick && _currentPlaceableObject == null)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            var hit = Physics2D.GetRayIntersection(ray, 200f, _splinePlacementLayerMask);
-            if (hit)
+            if (_inputs.ShapeBuilderActive)
             {
-                var go = Instantiate(_splineMarker, new Vector3(hit.point.x, hit.point.y), Quaternion.identity);
-                _pointMarkers.Add(go);
-
-                if (_points.Count > 0)
+                Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+                var hit = Physics2D.GetRayIntersection(ray, 200f, _splinePlacementLayerMask);
+                if (hit)
                 {
-                    var distance = Vector3.Distance(_points[0], hit.point);
-                    Debug.Log(distance);
+                    var go = Instantiate(_splineMarker, new Vector3(hit.point.x, hit.point.y), Quaternion.identity);
+                    _pointMarkers.Add(go);
 
-                    if (distance < 0.1f)
+                    if (_points.Count > 0)
                     {
-                        Debug.Log($"Super close man, {distance})");
-                        var newLocation = Instantiate(_locationPrefab, _placementParent.transform);
-                        // newLocation.AddComponent<Location>();
-                        var spriteShapeTest = newLocation.GetComponent<SpriteShapeTest>();
-                        spriteShapeTest.UpdateSprite(_points);
+                        var distance = Vector3.Distance(_points[0], hit.point);
+                        // Debug.Log(distance);
 
-                        _points.Clear();
-                        foreach (var marker in _pointMarkers)
+                        if (distance < 0.1f)
                         {
-                            Destroy(marker);
-                        }
+                            Debug.Log($"Super close man, {distance})");
+                            var newLocation = Instantiate(_locationPrefab, _placementParent.transform);
+                            // newLocation.AddComponent<Location>();
+                            var spriteShapeTest = newLocation.GetComponent<SpriteShapeTest>();
+                            spriteShapeTest.UpdateSprite(_points);
 
-                        _pointMarkers.Clear();
+                            _points.Clear();
+                            foreach (var marker in _pointMarkers)
+                            {
+                                Destroy(marker);
+                            }
+
+                            _pointMarkers.Clear();
+                        }
+                        else
+                        {
+                            _points.Add(hit.point);
+                        }
                     }
                     else
                     {
                         _points.Add(hit.point);
                     }
                 }
-                else
+            }
+            else if (_inputs.MapControlsActive)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+                var hit = Physics2D.GetRayIntersection(ray, 200f, _layerMask);
+                if (hit)
                 {
-                    _points.Add(hit.point);
+                    var location = hit.collider.GetComponent<Location>();
+                    if (location != null)
+                    {
+                        LocationSelectedEvent(location);
+                        // location.NewOwner("The Billhooks");
+                    }
                 }
             }
-
-
-            /*Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            var hit = Physics2D.GetRayIntersection(ray, 200f, _layerMask);
-            if (hit)
-            {
-                var location = hit.collider.GetComponent<Location>();
-                if (location != null)
-                {
-                    LocationSelectedEvent(location);
-                    // location.NewOwner("The Billhooks");
-                }
-            }*/
         }
     }
 
